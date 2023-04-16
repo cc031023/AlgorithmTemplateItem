@@ -1,7 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
-inline int gcd(int a, int b) // ·Ç0²ÅĞĞ,Óöµ½0×Ô¼ºÌØÅĞÒ»ÏÂ. 
+int gcd(int a, int b) // a,bä¸èƒ½ä¸º0
 {
-    while (b ^= a ^= b ^= a %= b);
+    while (b ^= a ^= b ^= a %= b)
+        ;
     return a;
+}
+inline int gcd(int a, int b) // a,bå¯ä»¥ä¸º0.
+{
+    if (b)
+        while ((a %= b) && (b %= a))
+            ;
+    return a + b;
 }
