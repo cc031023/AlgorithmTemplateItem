@@ -1,5 +1,5 @@
 // 1.求后序.
-inline void buildPostTree(int root, int l, int r)
+inline void BuildPostTree(int root, int l, int r)
 {
     if (l > r || root >= len)
     {
