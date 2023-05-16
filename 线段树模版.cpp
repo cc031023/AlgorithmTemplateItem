@@ -3,10 +3,8 @@ using namespace std;
 const int N = 1e5 + 3;
 long long a[N];
 long long v[(N << 2)], f[(N << 2)];
-inline void buildTree(int k, int l, int r)
-{
-    if (l == r)
-    {
+inline void buildTree(int k, int l, int r) {
+    if (l == r) {
         f[k] = a[l];
         return;
     }
@@ -16,10 +14,8 @@ inline void buildTree(int k, int l, int r)
     f[k] = f[2 * k] + f[2 * k + 1];
     return;
 }
-inline void addNumber(int k, int l, int r, int x, int y, long long z)
-{
-    if (l == x && r == y)
-    {
+inline void addNumber(int k, int l, int r, int x, int y, long long z) {
+    if (l == x && r == y) {
         v[k] += z;
         return;
     }
@@ -33,8 +29,7 @@ inline void addNumber(int k, int l, int r, int x, int y, long long z)
         addNumber(k * 2, l, mid, x, mid, z),
             addNumber(k * 2 + 1, mid + 1, r, mid + 1, y, z);
 }
-inline long long calculate(int k, int l, int r, int x, int y, long long p)
-{
+inline long long calculate(int k, int l, int r, int x, int y, long long p) {
     p += v[k];
     if (l == x && r == y)
         return p * (y - x + 1) + f[k];
@@ -47,32 +42,26 @@ inline long long calculate(int k, int l, int r, int x, int y, long long p)
         return calculate(k * 2, l, mid, x, mid, p) +
                calculate(k * 2 + 1, mid + 1, r, mid + 1, y, p);
 }
-int main()
-{
+int main() {
     ios::sync_with_stdio(false), cin.tie(nullptr);
     int n, m;
     cin >> n >> m;
-    for (int i = 1; i <= n; ++i)
-    {
+    for (int i = 1; i <= n; ++i) {
         cin >> a[i];
     }
     buildTree(1, 1, n);
-    while (m--)
-    {
+    while (m--) {
         int opt;
         cin >> opt;
-        if (opt & 1)
-        {
+        if (opt & 1) {
             int x, y;
             long long z;
             cin >> x >> y >> z;
-            addNumber(1, 1, n, x, y, z); // 某区间x,y内所有数加上z 
-        }
-        else
-        {
+            addNumber(1, 1, n, x, y, z);  // 鏌愬尯闂磝,y鍐呮墍鏈夋暟鍔犱笂z
+        } else {
             int x, y;
             cin >> x >> y;
-            cout << calculate(1, 1, n, x, y, 0ll) << endl; // 计算区间x,y的和. 
+            cout << calculate(1, 1, n, x, y, 0ll) << endl;  // 璁＄畻鍖洪棿x,y鐨勫拰.
         }
     }
     return 0;
