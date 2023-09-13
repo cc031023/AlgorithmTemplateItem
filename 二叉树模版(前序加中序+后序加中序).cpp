@@ -10,13 +10,13 @@ inline void BuildPostTree(int root, int l, int r) {
     v.push_back(pre[root]);
 }
 // 2.求前序.
-inline void buildPreTree(int root, int l, int r) {
+inline void BuildPreTree(int root, int l, int r) {
     if (l > r || root < 0) return;
     int i = l;
     while (i <= r && in[i] != post[root])
         ++i;
 
-    ans.push_back(post[root]);
-    buildPreTree(root + i - r - 1, l, i - 1);  // 左子树.
-    buildPreTree(root - 1, i + 1, r);          // 右子树.
+    v.push_back(post[root]);
+    BuildPreTree(root + i - r - 1, l, i - 1);  // 左子树.
+    BuildPreTree(root - 1, i + 1, r);          // 右子树.
 }
